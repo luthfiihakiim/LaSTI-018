@@ -1,0 +1,30 @@
+{
+  "name": "lasti",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon main.js"
+  },
+  "auhtor": "Luthfi Eko Trinowo, Randy C.S., Zalikha A. Gambetta, Dwi Nova Wijayanti.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luthfiihakiim/LaSTI-018.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/luthfiihakiim/LaSTI-018/issues"
+  },
+  "homepage": "https://github.com/luthfiihakiim/LaSTI-018#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "pg": "^7.12.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.4"
+  }
+}
