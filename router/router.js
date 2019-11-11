@@ -4,8 +4,8 @@ const router = express.Router();
 //const path = require('path'); //Front-end View
 const db = require ('../database/config');
 
-router.get('/users', (request, response) => {
-  db.query('SELECT * FROM users ORDER BY id ASC', (error, results) => {
+router.get('/employee', (request, response) => {
+  db.query('SELECT * FROM calon_pegawai ORDER BY id ASC', (error, results) => {
     if (error) {
       throw error
     }
