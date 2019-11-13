@@ -25,9 +25,9 @@ router.get('/employee/:id', (request, response) => {
 })
 
 router.post('/employee', (request, response) => {
-  const { nama, alamat, tglLahir, templatLhr, kontak, status } = request.body;
+  const { nama, alamat, tglLahir, tempatLhr, kontak, status } = request.body;
 
-  db.query('INSERT INTO calon_pegawai (nama, alamat, tglLahir, templatLhr, kontak, status) VALUES ($1, $2, $3, $4, $5, $6)', 
+  db.query('INSERT INTO calon_pegawai (nama, alamat, tglLahir, tempatLhr, kontak, status) VALUES ($1, $2, $3, $4, $5, $6)', 
   [nama, alamat, tglLahir, templatLhr, kontak, status], (error, results) => {
     if (error) {
       throw error

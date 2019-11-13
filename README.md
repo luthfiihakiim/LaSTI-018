@@ -21,7 +21,7 @@ CREATE TABLE calon_pegawai (
     nama VARCHAR(30),
     alamat VARCHAR(30),
     tglLahir VARCHAR(10),
-    templatLhr VARCHAR(20),
+    tempatLhr VARCHAR(20),
     kontak VARCHAR(15),
     status VARCHAR(10)
 );
