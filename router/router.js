@@ -5,8 +5,8 @@ const router = express.Router();
 const db = require ('../database/config');
 
 router.get('/pegawai', (request, response) => {
-  if (request.query.nama === undefined || request.query.nama.length < 1) {
-    db.query('SELECT * FROM capeg WHERE nama LIKE \'%$1%\' ORDER BY id ASC',[request.query.nama], (error, results) => {
+  if (request.query.nama !== undefined && request.query.nama.length > 0) {
+    db.query("SELECT * FROM capeg WHERE LOWER(nama) LIKE LOWER('%' || $1 || '%') ORDER BY id ASC",[request.query.nama], (error, results) => {
       if (error) {
         throw error
       }
