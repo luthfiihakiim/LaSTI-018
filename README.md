@@ -21,9 +21,13 @@ CREATE TABLE calon_pegawai (
     nama VARCHAR(30),
     alamat VARCHAR(30),
     tglLahir VARCHAR(10),
-    tempatLhr VARCHAR(20),
-    kontak VARCHAR(15),
-    status VARCHAR(10)
+    templatLhr VARCHAR(20),
+    kontak VARCHAR(15), 
+    status VARCHAR(10),
+    SMA VARCHAR(30) NOT NULL,
+    sarjanaI VARCHAR(30),
+    sarjanaII VARCHAR(30),
+    sarjanaIII VARCHAR(30)
 );
 
 INSERT INTO calon_pegawai (nama, alamat, tglLahir, tempatLhr, kontak, status)
@@ -31,12 +35,10 @@ INSERT INTO calon_pegawai (nama, alamat, tglLahir, tempatLhr, kontak, status)
 ```
 
 ```sql
-CREATE TABLE riwayat_pendidikan (
-    id SERIAL PRIMARY KEY, 
-    SMA VARCHAR(30),
-    sarjanaI VARCHAR(30),
-    sarjanaII VARCHAR(30),
-    sarjanaIII VARCHAR(30),
-    idCPegawai VARCHAR(10)
+CREATE TABLE nilai (
+    id SERIAL PRIMARY KEY,
+    calon_id INTEGER REFERENCES calon_pegawai(id),
+    nilai NUMERIC(5,2) NOT NULL,
+    PRIMARY KEY (id)
 );
 ```
