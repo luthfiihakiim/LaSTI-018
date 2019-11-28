@@ -35,14 +35,14 @@ CREATE TABLE questions (
 );
 
 INSERT INTO questions (testid, nama, maxscore, minpassscore)
-VALUES (1, 'Pendidikan Formal', '100', '80'), (1, 'Pengalaman Kerja', '100', '80'), (1, 'Pengetahuan Teknis', '100', '80'),
-(1, 'Motivasi', '100', '70'), (1, 'Kerja Sama', '100', '60'), (1, 'Etika', '100', '80'), (1, 'Kemampuan Komunikasi', '100', '70'),
-(1, 'Kemampuan Bahasa Asing', '100', '50'), (1, 'Penampilan Diri', '100', '80'), (1, 'Kemampuan Memimpin', '100', '80'),
+VALUES (3, 'Pendidikan Formal', '100', '80'), (3, 'Pengalaman Kerja', '100', '80'), (3, 'Pengetahuan Teknis', '100', '80'),
+(3, 'Motivasi', '100', '70'), (3, 'Kerja Sama', '100', '60'), (3, 'Etika', '100', '80'), (3, 'Kemampuan Komunikasi', '100', '70'),
+(3, 'Kemampuan Bahasa Asing', '100', '50'), (3, 'Penampilan Diri', '100', '80'), (3, 'Kemampuan Memimpin', '100', '80'),
 (2, 'Tes Jasmani', '100', '60'), (2, 'Tes Narkoba', '100', '100'), (2, 'Ability Test', '100', '80'),
 (2, 'Achievement Test', '100', '80'), (2, 'Personality Test', '100', '80'), 
-(3, 'Curriculum Vitae', '100', '100'), (3, 'Ijazah', '100', '100'), (3, 'Sertifikat', '100', '100'),
-(3, 'Transkrip', '100', '100'), (3, 'Kartu Keluarga', '100', '100'), (3, 'Surat Lamaran', '100', '100'),
-(3, 'Surat Pernyataan', '100', '100');
+(1, 'Curriculum Vitae', '100', '100'), (1, 'Ijazah', '100', '100'), (1, 'Sertifikat', '100', '100'),
+(1, 'Transkrip', '100', '100'), (1, 'Kartu Keluarga', '100', '100'), (1, 'Surat Lamaran', '100', '100'),
+(1, 'Surat Pernyataan', '100', '100');
 
 CREATE TABLE nilai (
   idcapeg INTEGER NOT NULL REFERENCES capeg(id),

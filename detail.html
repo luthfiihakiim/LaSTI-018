@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+
+<link rel="stylesheet" href="home.css">
+<script src="home.js" ></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Seleksi Calon Pegawai ITB</title>
+</head>
+
+<body>
+
+  <h1 class="header">
+      <img src="logo-itb-512px.png" width="60" height="60" alt="logo itb"></img>
+      <p class="judul"> Institut Teknologi Bandung </p>
+  </h1>
+
+  <div class="tab" style="display: inline-flexbox;">
+      <button class="tablinks" onclick="openTable(event, 'DataCalon')">Data Calon Pegawai</button>
+      <button class="tablinks" onclick="openTable(event, 'Kelulusan')">Kelulusan</button>
+      <a href="#"><button href="#notification" class="notification" style="background-color: lightgray; color: #333;"><b>Log Out</b></button></a>
+  </div>
+
+  <div id="DataCalon" class="tabcontent">
+    <!-- tabel capeg -->
+    <fieldset id="corners" style="width: min-content; margin: auto;">
+      <div class="topnav" style="margin-left: 10px; margin-right: 10px;">
+        <p padding: 10px></p>
+        <h1 style="font-size: 20px;">Pencarian Data Calon Pegawai</h1>
+        <form method="GET" action="#">
+          <b>Keyword : </b><br><input class="topnav" type="text" placeholder="Mencari Berdasarkan Nama Pegawai..." name="carinama" id="carinama" style="float: left; width: 500px;"><br>
+          <p padding: 30px></p><br>
+          <button id="cariData" onclick="showtabel()" style="width: 80px; height: 30px;">Search</button>
+        </form>
+      </div><br>
+    </fieldset>
+
+    <table class="tabcapeg" id="tabcapeg" style="display: none;">
+        <thead id="tabheadcapeg">
+            <tr>
+                <!-- <th style="text-align: center;">No</th> -->
+                <th style="text-align: center;">Nama</th>
+                <th style="text-align: center;">ID</th>
+                <th style="text-align: center;"></th>
+                <th style="text-align: center;"></th>
+            <tr>
+        </thead>
+        <tbody id="tabbodycapeg"></tbody>
+    </table>
+    
+
+    <!-- detail modal -->
+    <div id="detailModal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+          <span class="close">&times;</span>
+          <div id="dmods">
+            <form id="daftardetail" method="GET" action="#">
+              <h1>Detail</h1>
+              <label>Nilai Administratif</label>
+              <input type="text" id="admcapeg" disabled>
+              <label>Nilai Kesehatan</label>
+              <input type="text" id="sehatcapeg" disabled>
+              <label>Nilai Wawancara</label>
+              <input type="text" id="wawancapeg" disabled>
+            </form>
+          </div>
+      </div>
+    </div>
+
+    <!-- Form Modal -->
+    <div id="formModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <!-- <p id="hasilmodal"> -->
+              <div id="hasilmodal">
+                <h4>Detail Calon Pegawai</h4>
+                <label for="nama">Nama</label>
+                <input type="text" id="nama" name="nama" disabled>
+          
+                <label for="alamat">Alamat</label>
+                <input type="text" id="alamat" name="alamat" disabled>
+          
+                <label for="email">Email </label>
+                <input type="text" id="email" name="email" disabled>
+          
+                <label for="NoTelp">Nomor Telepon </label>
+                <input type="text" id="notelp" name="notelp" disabled>
+                
+                <label for="tgllahir">Tanggal Lahir </label>
+                <input type="text" id="tgllahir" name="tgllahir" disabled>
+          
+                <label for="Kategori"> Kategori </label>
+                <input type="text" id="kategori" name="kategori" disabled>
+                <!-- <select id="kategori" name="kategori">
+                    <option value="dosen">Dosen</option>
+                    <option value="tendik">Tenaga Didik</option>
+                </select> -->
+
+                <input id="capegid" type="hidden"></input>
+            
+                <div id="formnilai">
+                  <h4 id="test">Penilaian</h4>
+                  <button class="accordion" onclick="showpanel()">Administrasi</button>
+                    <div class="panel">
+                        <p style="padding: 3px;"></p>
+                        <form action="#" method="post" id="postadm">
+                          <input class="messageCheckbox" type="checkbox" value="1"> Curriculum Vitae </br>
+                          <input class="messageCheckbox" type="checkbox" value="2"> Ijazah<br/>
+                          <input class="messageCheckbox" type="checkbox" value="3"> Sertifikat<br/>
+                          <input class="messageCheckbox" type="checkbox" value="4"> Transkrip<br/>
+                          <input class="messageCheckbox" type="checkbox" value="5"> Kartu Keluarga<br/>
+                          <input class="messageCheckbox" type="checkbox" value="6"> Surat Lamaran<br/>
+                          <input class="messageCheckbox" type="checkbox" value="7"> Surat Pernyataan<br/>
+                          <p style="padding: 3px;"></p>
+                          <button id="submitadm">Submit</button>
+                        </form>
+                    </div><br/>
+                  <button class="accordion" onclick="showpanel()">Kesehatan</button>
+                    <div class="panel">
+                      <p style="padding: 3px;"></p>
+                      <form action="#" method="post" id="postsehat">
+                        <label for="jasmani" style="font-size: medium;">Tes Jasmani :</label><br>
+                        <div class="slidecontainer">
+                            <span><input type="number" id="updatedemo" placeholder="Masukkan nilai tes jasmani..." style="width: 350px;"></span>
+                        </div>
+                        <p style="padding: 3px;"></p>
+            
+                        <label for="narkoba" style="font-size: medium;">Tes Narkoba :</label><br>
+                        <select id="narkobajwb" name="narkobajwb" style="width: 400px;">
+                            <option value="Ya">Calon pegawai positif menggunakan narkoba</option>
+                            <option value="Tidak">Calon pegawai negatif menggunakan narkoba</option>
+                        </select>
+                        <p style="padding: 10px;"></p>
+                        
+                        <div>
+                          <label for="Psikometri" style="font-size: medium;">Tes Psikometri :</label><br>
+                          <label>Ability Test</label>
+                          <input type="number" name="ability" id="ability" placeholder="Masukkan nilai ability test..." style="margin-left: 74px; width: 400px;"><br/>
+                          <p style="padding: 2px;"></p>
+                          
+                          <label>Achievement Test</label>
+                          <input type="number" name="achievement" id="achievement" placeholder="Masukkan nilai achievement test..." style="margin-left: 28px; width: 400px;"><br/>
+                          <p style="padding: 2px;"></p>
+                          
+                          <label>Personality Test</label>
+                          <input type="number" name="personality" id="personality" placeholder="Masukkan nilai personality test..." style="margin-left: 40px; width: 400px;"><br/>
+                        </div>
+                        <p style="padding: 3px;"></p>
+            
+                        <button id="submitsehat">Submit</button>
+                      </form>
+                    </div>
+            
+                  <button class="accordion" onclick="showpanel()">Wawancara</button>
+                  <div class="panel">
+                      <p style="padding: 3px;"></p>
+                      <form action="#" method="post" id="postwawan">
+                          <label>Pendidikan Formal</label>
+                          <input type="number" name="pendformal" id="pendformal" placeholder="Masukkan nilai pendidikan formal..." style="margin-left: 74px; width: 400px;"><br/>
+                          <p style="padding: 3px;"></p>            
+                          
+                          <label>Pengalaman Kerja</label>
+                          <input type="number" name="pengalaman kerja" id="pengalamankerja" placeholder="Masukkan nilai pengalaman kerja..." style="margin-left: 78px; width: 400px;"><br/>
+                          <p style="padding: 3px;"></p>
+                          
+                          <label>Pengetahuan Teknis</label>
+                          <input type="number" name="pengetahuan teknis" id="pengetahuanteknis" placeholder="Masukkan nilai pengetahuan teknis..." style="margin-left: 64px; width: 400px;"><br/>
+                          <p style="padding: 3px;"></p>
+                          
+                          <label>Motivasi</label>
+                          <input type="number" name="motivasi" id="motivasi" placeholder="Masukkan nilai motivasi kerja..." style="margin-left: 142px; width: 400px;"><br/>
+                          <p style="padding: 3px;"></p>
+                          
+                          <label>Kerja Sama</label>
+                          <input type="number" name="kerja sama" id="kerjasama" placeholder="Masukkan nilai kerja sama..." style="margin-left: 122px; width: 400px;"><br/>
+                          <p style="padding: 3px;"></p>
+                          
+                          <label>Etika</label>
+                          <input type="number" name="etika" id="etika" placeholder="Masukkan nilai etika..." style="margin-left: 166px; width: 400px;"><br/>
+                          <p style="padding: 3px;"></p>
+                          
+                          <label>Kemampuan Komunikasi</label>
+                          <input type="number" name="kemampuan komunikasi" id="komunikasi" placeholder="Masukkan nilai kemampuan komunikasi..." style="margin-left: 31px; width: 400px;"><br/>
+                          <p style="padding: 3px;"></p>
+                          
+                          <label>Kemampuan Bahasa Asing</label>
+                          <input type="number" name="bhs asing" id="bhsasing" placeholder="Masukkan nilai kemampuan bahasa asing..." style="margin-left: 19px; width: 400px;"><br/>
+                          <p style="padding: 3px;"></p>
+                          
+                          <label>Penampilan Diri</label>
+                          <input type="number" name="penampilan diri" id="penampilandiri" placeholder="Masukkan nilai penampilan diri..." style="margin-left: 93px; width: 400px;"><br/>
+                          <p style="padding: 3px;"></p>
+                          
+                          <label>Kemampuan Memimpin</label>
+                          <input type="number" name="Kemampuan Memimpin" id="KemampuanMemimpin" placeholder="Masukkan nilai Kemampuan Memimpin..." style="margin-left: 40px; width: 400px;"><br/>
+                          <p style="padding: 3px;"></p>
+
+                          <button id="submitwawan">Submit</button>
+                      </form>
+                  </div><br/>
+                </div>
+              </div>
+            <!-- </p> -->
+        </div>
+    </div>
+    
+    <!-- jquery & ajax -->
+    <script>
+    $(document).ready(function(){
+      var tabmodiv = document.getElementById('tabbodycapeg');
+      $("#cariData").click(function(e) {
+        e.preventDefault();
+        $.ajax({
+          url: 'http://localhost:3000/pegawai?nama='+encodeURIComponent(document.getElementById('carinama').value),
+          crossDomain: true,
+          type:'GET',
+          dataType: 'json',
+          success: function(response) {
+            content="";
+            $.each(response, function(key, value){
+              content+=
+                "<tr>" +
+                    "<td>"+value.nama+"</th>\n" +
+                    "<td>"+value.id+"</th>\n" +
+                    "<td><button id=\"fModal\" onclick=\"showform('"+value.id+"','"+value.nama+"','"+value.alamat+"','"+value.email+"','"+value.no_telepon+"','"+value.tanggal_lahir+"','"+value.category+"')\">Beri Nilai</button>" +
+                    "<td><button id=\"dModal\" onclick=\"showdetail()\">Detail</button>" +
+                "</tr>";
+            });
+            tabmodiv.innerHTML = content;
+          },
+          error: function(response) {
+            console.log(response);
+          }
+        });
+      });
+    });
+    $("dModal").click(function() {
+      $.ajax ({
+        url : 'http://localhost:3000/nilai/'+encodeURIComponent(document.getElementById('capegid').value),
+        crossDomain: true,
+        type : 'GET',
+        dataType : 'json',
+        success: function(response) {
+          var nilai1 = "";
+          var nilai2 = "";
+          var nilai3 = "";
+          $.each(response, function(key, value) {
+            if (value.idquestion == 1) {
+              nilai1 += value.score;
+            } else if (value.idquestion == 2) {
+              nilai2 += value.score;
+            } else {
+              nilai3 += value.score;
+            }
+          });
+          document.getElementById('admcapeg').innerHTML = nilai1;
+          document.getElementById('sehatcapeg').innerHTML = nilai2;
+          document.getElementById('wawancapeg').innerHTML = nilai3;
+        },
+        error: function(response) {
+          console.log(response);
+        }
+      });
+    });
+    // $('#submitadm').click(function(){
+    //   var id = document.getElementById('capegid').value;
+    //   var checkedValue = $('.messageCheckbox:checked').val();
+      
+    //   $.ajax({
+    //       url: 'http://localhost:3000/nilai/'+encodeURIComponent(id),
+    //       crossDomain: true,
+    //       type:'POST',
+    //       dataType: 'json',
+    //   }).done(function(response){
+    //       $.each(response, function(key, value) {
+
+    //       })
+    //   }).fail(function(response){
+    //       console.log(response);
+    //       alert('Maaf, harap coba lagi');
+    //   });
+    // });
+    </script>
+
+</body>
+
+</html>

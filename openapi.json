@@ -1,0 +1,427 @@
+{
+  "openapi": "3.0.0",
+  "servers": [
+    {
+      "description": "SwaggerHub API Auto Mocking",
+      "url": "http://178.128.104.74/seleksipegawaibaru"
+    }
+  ],
+  "info": {
+    "description": "Dokumentasi API Tugas Besar LaSTI",
+    "version": "1.0.0",
+    "title": "Simple Inventory API",
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "tags": [
+    {
+      "name": "admins",
+      "description": "Secured Admin-only calls"
+    },
+    {
+      "name": "developers",
+      "description": "Operations available to regular developers"
+    }
+  ],
+  "paths": {
+    "/pegawai": {
+      "get": {
+        "tags": [
+          "developers"
+        ],
+        "summary": "mencari detail pegawai",
+        "operationId": "searchEmployee",
+        "description": "Mencari detail data dari pegawai\n",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "nama",
+            "description": "Mengambil nama pegawai",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "search results matching criteria",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/nilai"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "bad input parameter"
+          },
+          "500": {
+            "description": "internal server error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "admins"
+        ],
+        "summary": "Menambahkan pegawai baru\n",
+        "operationId": "createNewEmployee",
+        "description": "Add new employee\n",
+        "requestBody": {
+          "description": "nilai untuk ditambahkan",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/capeg"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "employee created"
+          },
+          "400": {
+            "description": "invalid object"
+          },
+          "404": {
+            "description": "employee not found"
+          }
+        }
+      }
+    },
+    "/nilai/{id}": {
+      "get": {
+        "tags": [
+          "developers"
+        ],
+        "summary": "Mengambil nilai dari seorang calon pegawai\n",
+        "operationId": "searchScoreByID",
+        "description": "Get score for a determined id\n",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "id dari calon pegawai",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "search results matching criteria",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/capeg"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "bad input parameter"
+          }
+        }
+      }
+    },
+    "/nilai/{idc}/{idq}": {
+      "delete": {
+        "tags": [
+          "admins"
+        ],
+        "summary": "Mengambil nilai dari seorang calon pegawai\n",
+        "operationId": "deleteScoreByID",
+        "description": "Get score for a determined id\n",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "idc",
+            "description": "id dari calon pegawai",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "idq",
+            "description": "id dari pertanyaan",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "search results matching criteria",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/capeg"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "bad input parameter"
+          }
+        }
+      }
+    },
+    "/nilai": {
+      "post": {
+        "tags": [
+          "admins"
+        ],
+        "summary": "Menambah daftar nilai pegawai berdasarkan ID\n",
+        "operationId": "addScoreByID",
+        "description": "Add employee's score for a determined id\n",
+        "requestBody": {
+          "description": "nilai untuk ditambahkan",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/nilai"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "nilai created"
+          },
+          "400": {
+            "description": "invalid object"
+          },
+          "404": {
+            "description": "parameter not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "admins"
+        ],
+        "summary": "Mengubah nilai dari suatu pertanyaan dari calon pegawai\n",
+        "operationId": "updateScoreById",
+        "description": "Change employee's score by determined id\n",
+        "requestBody": {
+          "description": "pembaruan nilai",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/nilai"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "nilai created"
+          },
+          "400": {
+            "description": "invalid object"
+          },
+          "404": {
+            "description": "parameter not found"
+          }
+        }
+      }
+    },
+    "/lulus/{id}": {
+      "get": {
+        "tags": [
+          "developers"
+        ],
+        "summary": "Mengambil status pegawai apakah lulus atau tidak\n",
+        "operationId": "searchEmployeeStatus",
+        "description": "Get an employee status for a determined id\n",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "id dari calon pegawai",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "search results matching criteria",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/capeg"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "bad input parameter"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "capeg": {
+        "type": "object",
+        "required": [
+          "id",
+          "nama",
+          "alamat",
+          "email",
+          "no_telepon",
+          "tanggalLahir",
+          "category"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int",
+            "example": 1
+          },
+          "nama": {
+            "type": "string",
+            "format": "name",
+            "example": "Dwi Nova"
+          },
+          "alamat": {
+            "type": "string",
+            "format": "string",
+            "example": "Jalan Cemara No. 12"
+          },
+          "email": {
+            "type": "string",
+            "format": "string",
+            "example": "aaaashiyap@atta.com"
+          },
+          "no_telepon": {
+            "type": "string",
+            "format": "string",
+            "example": 2065929
+          },
+          "tanggalLahir": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2016-08-29T09:12:33.001Z"
+          },
+          "category": {
+            "type": "integer",
+            "format": "int",
+            "example": 1
+          }
+        }
+      },
+      "tests": {
+        "type": "object",
+        "required": [
+          "id",
+          "testname",
+          "prereq",
+          "passing_score"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int",
+            "example": 1
+          },
+          "testname": {
+            "type": "string",
+            "format": "string",
+            "example": "Administrasi"
+          },
+          "prereq": {
+            "type": "integer",
+            "format": "int",
+            "example": 2
+          },
+          "passing_score": {
+            "type": "integer",
+            "format": "int",
+            "example": 80
+          }
+        }
+      },
+      "questions": {
+        "type": "object",
+        "required": [
+          "id",
+          "testid",
+          "nama",
+          "maxscore",
+          "minpassscore"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int",
+            "example": 1
+          },
+          "testid": {
+            "$ref": "#/components/schemas/tests"
+          },
+          "nama": {
+            "type": "string",
+            "format": "string",
+            "example": "Pendidikan Formal"
+          },
+          "maxscore": {
+            "type": "integer",
+            "format": "int",
+            "example": 100
+          },
+          "minpassscore": {
+            "type": "integer",
+            "format": "int",
+            "example": 80
+          }
+        }
+      },
+      "nilai": {
+        "type": "object",
+        "required": [
+          "idcapeg",
+          "idquestion",
+          "score"
+        ],
+        "properties": {
+          "idcapeg": {
+            "$ref": "#/components/schemas/capeg"
+          },
+          "idquestion": {
+            "$ref": "#/components/schemas/questions"
+          },
+          "score": {
+            "type": "integer",
+            "format": "int",
+            "example": 100
+          }
+        }
+      }
+    }
+  }
+}
